@@ -4,6 +4,47 @@ reg.register('service.fastlane.task', {
     name: _('Fastlane Task'),
     icon: '/plugin/cla-fastlane-plugin/icon/fastlane.svg',
     form: '/plugin/cla-fastlane-plugin/form/fastlane-form.js',
+    rulebook: {
+        moniker: 'fastlane_task',
+        description: _('Launches Fastlane task'),
+        required: [ 'system', 'server'],
+        allow: ['system', 'server', 'ios_resource', 'project_path', 'keychain_password',
+        'json_path', 'apk_path', 'package_name', 'track', 'args', 'skip_waiting', 'submit_review',
+        'custom_params', 'errors'],
+        mapper: {
+            'ios_resource':'iOSCi',
+            'project_path':'projectPath',
+            'keychain_password':'keychainPassword',
+            'json_path':'jsonPath',
+            'apk_path':'apkPath',
+            'package_name':'packageName',
+            'skip_waiting':'skipWaiting',
+            'custom_params':'customParams',
+            'submit_review':'submitReview'
+        },
+        examples: [{
+            fastlane_task: {
+                server: 'fastlane_server',
+                system: 'Android',
+                json_path: '/path/to/json.json',
+                apk_path: '/path/to/app.apk',
+                package_name: 'package.name',
+                track: 'custom',
+                custom_params: ['-a alpha']
+            }
+        },{
+            fastlane_task: {
+                server: 'fastlane_server',
+                system: 'IOS',
+                ios_resource: 'ios_resource',
+                project_path: '/path/to/project/',
+                keychain_password: '******',
+                args: 'deliver',
+                submit_review: '1',
+                custom_params: ['--force', '--skip_binary_upload']
+            }
+        }]
+    },
     handler: function(ctx, params) {
 
         var ci = require("cla/ci");
