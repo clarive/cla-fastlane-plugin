@@ -98,7 +98,7 @@ reg.register('service.fastlane.task', {
                 ' && export PATH="/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:$PATH"' +
                 '  && cd ' + projectPath;
             if (keychainPassword) {
-                command = command + ' && security unlock-keychain -p ' + keychainPassword + ' && ';
+                command = command + " && security unlock-keychain -p '" + keychainPassword + "' && ";
             }
             if (args != 'custom') {
                 fullCommand = command + " fastlane " + args;
