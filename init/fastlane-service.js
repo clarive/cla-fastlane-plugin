@@ -10,7 +10,7 @@ reg.register('service.fastlane.task', {
         required: [ 'system', 'server'],
         allow: ['system', 'server', 'ios_resource', 'project_path', 'keychain_password',
         'json_path', 'apk_path', 'package_name', 'track', 'args', 'skip_waiting', 'submit_review',
-        'custom_params', 'errors'],
+        'custom_params', 'errors','environment_file'],
         mapper: {
             'ios_resource':'iOSCi',
             'project_path':'projectPath',
@@ -20,6 +20,7 @@ reg.register('service.fastlane.task', {
             'package_name':'packageName',
             'skip_waiting':'skipWaiting',
             'custom_params':'customParams',
+            'environment_file':'environmentFile',
             'submit_review':'submitReview'
         },
         examples: [{
@@ -64,6 +65,7 @@ reg.register('service.fastlane.task', {
         var skipWaiting = params.skipWaiting || false;
         var submitReview = params.submitReview || false;
         var keychainPassword = params.keychainPassword || '';
+        var environmentFile = params.environmentFile || '~/.profile';
         var response;
         if (server == "") {
             log.fatal(_("No server selected"));
@@ -94,7 +96,13 @@ reg.register('service.fastlane.task', {
             });
             var appleId = iOSCi.appleId || '';
             var password = iOSCi.password || '';
-            var command = 'export LANG=en_US.UTF-8 && export LC_ALL=en_US.UTF-8 && export LANGUAGE=en_US.UTF-8' +
+            var command = '';
+
+	    if ( environmentFile ) {
+		command = '. ' + environmentFile + ' && ';
+            }
+
+            command = command + 'export LANG=en_US.UTF-8 && export LC_ALL=en_US.UTF-8 && export LANGUAGE=en_US.UTF-8' +
                 ' && export PATH="/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:$PATH"' +
                 '  && cd ' + projectPath;
             if (keychainPassword) {

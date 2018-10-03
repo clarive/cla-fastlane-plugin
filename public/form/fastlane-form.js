@@ -30,6 +30,13 @@
         width: 400
     });
 
+    var environmentFile = Cla.ui.textField({
+        name: 'environmentFile',
+        fieldLabel: _('Environment File'),
+        value: data.environmentFile || '',
+        allowBlank: true
+    });
+
     var projectPathTextField = Cla.ui.textField({
         name: 'projectPath',
         fieldLabel: _('Project path'),
@@ -212,6 +219,7 @@
             serverComboBox,
             iOSCi,
             projectPathTextField,
+            environmentFile,
             keychainPassword,
             args,
             submitReview,
