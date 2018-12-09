@@ -1,6 +1,6 @@
 # Fastlane Plugin
 
-<img src="https://cdn.rawgit.com/clarive/cla-fastlane-plugin/master/public/icon/fastlane.svg?sanitize=true" alt="Fastlane Plugin" title="Fastlane Plugin" width="120" height="120">
+<img src="https://cdn.jsdelivr.net/gh/clarive/cla-fastlane-plugin@master/public/icon/fastlane.svg?sanitize=true" alt="Fastlane Plugin" title="Fastlane Plugin" width="120" height="120">
 
 The Fastlane plugin will allow you to deploy and release applications automatically to the Google Play Store and/or Apple store from Clarive.
 
